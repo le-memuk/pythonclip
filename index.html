@@ -1,38 +1,63 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Mi Proyecto</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        text-align: center;
-        padding-top: 50px;
-    }
-    h1 {
-        color: #333;
-    }
-    a {
-        display: inline-block;
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-top: 20px;
-    }
-    a:hover {
-        background-color: #0056b3;
-    }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PythonClip</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 60px auto; padding: 0 20px; background: #0b0b14; color: #dce0f0; }
+    h1 { color: #7c5cf0; }
+    .btn { display: inline-block; background: #7c5cf0; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-size: 16px; margin-top: 20px; cursor: pointer; border: none; }
+    .btn:hover { background: #e05090; }
+    code { background: #1c1c30; padding: 2px 8px; border-radius: 4px; font-size: 14px; }
+    ul { line-height: 2; }
+  </style>
 </head>
 <body>
-    <h1>¡Bienvenido a mi web!</h1>
-    <p>Aquí puedes descargar mi programa:</p>
-    
-    <a href="pythonclip.exe" download="pythonclip.exe">
-        Descargar PythonClip (.exe)
-    </a>
+  <h1>◆ PythonClip</h1>
+  <p>Animador de fotogramas hecho en Python.</p>
+  <p><strong>Requisitos:</strong></p>
+  <ul>
+    <li>Python 3.10 o superior</li>
+    <li><code>pip install pillow</code></li>
+    <li><code>pip install pygame</code> (opcional, para audio)</li>
+  </ul>
+
+  <!-- Botón Python -->
+  <button class="btn" onclick="descargar('pythonclip.py', 'pythonclip.py')">
+    ⬇ Descargar PythonClip.py
+  </button>
+
+  <script>
+    function descargar(url, nombreArchivo) {
+      fetch(url)
+        .then(res => res.blob())
+        .then(blob => {
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = nombreArchivo;
+          a.click();
+          URL.revokeObjectURL(a.href);
+        })
+        .catch(() => {
+          // Fallback si fetch falla
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = nombreArchivo;
+          a.click();
+        });
+    }
+  </script>
 </body>
 </html>
+```
+
+Y **borra el archivo `_headers`** — no sirve para nada en GitHub Pages y solo confunde.
+
+---
+
+## Resumen de lo que tienes que tener en tu carpeta
+```
+tunombre.github.io/
+├── index.html       ← el nuevo de arriba
+└── pythonclip.py    ← tu programa
