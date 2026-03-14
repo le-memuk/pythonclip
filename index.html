@@ -9,14 +9,17 @@
     h1 { color: #7c5cf0; }
     .btn { display: inline-block; background: #7c5cf0; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-size: 16px; margin-top: 20px; cursor: pointer; border: none; }
     .btn:hover { background: #e05090; }
+    .btn-exe { background: #40d488; color: #080810; margin-left: 12px; }
+    .btn-exe:hover { background: #e05090; color: #fff; }
     code { background: #1c1c30; padding: 2px 8px; border-radius: 4px; font-size: 14px; }
     ul { line-height: 2; }
+    .nota { margin-top: 16px; font-size: 13px; color: #7080a0; }
   </style>
 </head>
 <body>
   <h1>◆ PythonClip</h1>
   <p>Animador de fotogramas hecho en Python.</p>
-  <p><strong>Requisitos:</strong></p>
+  <p><strong>Requisitos para el .py:</strong></p>
   <ul>
     <li>Python 3.10 o superior</li>
     <li><code>pip install pillow</code></li>
@@ -28,10 +31,20 @@
     ⬇ Descargar PythonClip.py
   </button>
 
+  <!-- Botón EXE -->
+  <button class="btn btn-exe" onclick="descargar('PythonClip.exe', 'PythonClip.exe')">
+    ⬇ Descargar PythonClip.exe
+  </button>
+
+  <p class="nota">El .exe no necesita Python instalado. El .py requiere Python y las librerías.</p>
+
   <script>
     function descargar(url, nombreArchivo) {
       fetch(url)
-        .then(res => res.blob())
+        .then(res => {
+          if (!res.ok) throw new Error('Archivo no encontrado');
+          return res.blob();
+        })
         .then(blob => {
           const a = document.createElement('a');
           a.href = URL.createObjectURL(blob);
@@ -40,7 +53,6 @@
           URL.revokeObjectURL(a.href);
         })
         .catch(() => {
-          // Fallback si fetch falla
           const a = document.createElement('a');
           a.href = url;
           a.download = nombreArchivo;
@@ -50,4 +62,3 @@
   </script>
 </body>
 </html>
-#esto no tiene virus 
